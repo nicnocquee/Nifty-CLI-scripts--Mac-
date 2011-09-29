@@ -8,6 +8,10 @@ Just some scripts to ease my life.
 
     Cut/trim video. Requirement: `ffmpeg`.
 
+2.  togglehiddenfiles
+
+    Show or hide hidden files in Mac OS X. Works on Lion.
+
 
 ## Copyright and License
 

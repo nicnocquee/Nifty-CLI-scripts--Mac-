@@ -1,0 +1,12 @@
+#!/bin/sh
+
+isShown="$(defaults read com.apple.finder AppleShowAllFiles)"
+
+if [ "$isShown" = FALSE ]
+then
+defaults write com.apple.finder AppleShowAllFiles TRUE
+else
+defaults write com.apple.finder AppleShowAllFiles FALSE
+fi
+
+killall Finder
