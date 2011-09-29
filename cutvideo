@@ -2,7 +2,7 @@
 
 if [ $# != 4 ]
 then
-echo "Usage: $0 [second_start] [duration] [input] [output]"
+echo "Usage: `basename $0` [second_start] [duration] [input] [output]"
 exit 1
 fi
 

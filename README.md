@@ -12,6 +12,10 @@ Just some scripts to ease my life.
 
     Show or hide hidden files in Mac OS X. Works on Lion.
 
+3.  appendprefixtoeachline
+
+    Append string to the beginning of each line in a file.
+
 
 ## Copyright and License
 

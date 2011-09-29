@@ -1,0 +1,11 @@
+#/bin/sh
+
+if [ $# != 2 ]
+then
+echo "Usage: `basename $0` [string to append] [input file]"
+echo "Output: A new file with suffix .new"
+exit 1
+fi
+
+SED_ARG="-e 's/^/$1/' $2 > $2.new"
+eval sed "$SED_ARG" 
