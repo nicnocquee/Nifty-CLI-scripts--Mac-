@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ $# != 4 ]
+then
+echo "Usage: $0 [second_start] [duration] [input] [output]"
+exit 1
+fi
+
+ffmpeg -sameq -ss $1 -t $2 -i $3 $4
