@@ -1,0 +1,73 @@
+#!/bin/sh
+
+if [ $# -eq 0 ] ; then
+ echo "usage: `basename $0` [-p prefix] [-s suffix] [-n new_name] input" >&2
+ echo "-v to verbose"
+ echo "-f to rename the file instead of save the file as a new name"
+ exit 1
+fi ; 
+
+prefix=""
+suffix=""
+newname=""
+verbose=0
+overwrite=0
+
+while [[ $1 = -* ]]; do
+  case "$1" in
+    -p|--prefix)
+      prefix="$2"
+      shift 2
+      ;;
+    -s|--suffix)
+      suffix="$2"
+      shift 2
+      ;;
+    -n|--name)
+      newname="$2"
+      shift 2
+      ;;
+    -v|--verbose)
+      verbose=1
+	  shift
+      ;;
+    -f|--force)
+      overwrite=1
+      shift
+      ;;
+    *)
+      echo "Error: Unknown option: $1" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ $verbose -eq 1 ] ; then
+	echo "Processing files..."
+	echo "PREFIX: $prefix"
+	echo "SUFFIX: $suffix"
+	echo "NEWNAME: $newname"
+fi;
+
+numbering=""
+no=1
+
+for file; do
+  name=${file%\.*}
+  if [ -n "$newname" ] ; then
+    name="$newname"
+  fi ;
+  if [ $# -gt 1 ] ; then
+    numbering="-$no"
+    no=`expr $no + 1`
+  fi ;
+  fullnewname="${prefix}${name}${suffix}${numbering}.${file#*.}"
+  if [ $verbose -eq 1 ] ; then
+    echo "Renaming $file to $fullnewname ..."
+  fi ;
+  if [ $overwrite -eq 0 ] ; then
+    cp $file $fullnewname
+  else
+    mv $file $fullnewname
+  fi ;
+done

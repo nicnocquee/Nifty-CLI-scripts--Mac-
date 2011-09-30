@@ -15,6 +15,34 @@ Just some scripts to ease my life.
 3.  appendprefixtoeachline
 
     Append string to the beginning of each line in a file.
+    
+4.  rename
+
+    Make a copy of file(s) with a new name. 
+    
+        rename -n cool image.jpg
+    
+    will make a copy of image.jpg under the name cool.jpg.
+    
+        rename -p cool image.jpg
+        
+    will make a copy image.jpg under the name coolimage.jpg
+    
+        rename -s cool image.jpg
+            
+    will make a copy image.jpg under the name imagecool.jpg
+    
+        rename -p very -s photo -n cool image.jpg
+        
+    will make a copy image.jpg under the name verycoolphoto.jpg
+    
+        rename -p very -s photo -n cool *.jpg
+        
+    will make copies of jpg files in the directory under the name verycoolphoto-#.jpg where `#` starts from `1`
+    
+        rename -f -n cool image.jpg
+    
+    will rename image.jpg to cool.jpg.
 
 
 ## Copyright and License
