@@ -53,21 +53,24 @@ numbering=""
 no=1
 
 for file; do
-  name=${file%\.*}
+if [ $# -gt 1 ] ; then
+  numbering="-$no"
+  no=`expr $no + 1`
+fi ;
+find . -name "$file" | while read filename; do
+  name=${filename%\.*}
   if [ -n "$newname" ] ; then
     name="$newname"
   fi ;
-  if [ $# -gt 1 ] ; then
-    numbering="-$no"
-    no=`expr $no + 1`
-  fi ;
-  fullnewname="${prefix}${name}${suffix}${numbering}.${file#*.}"
+  ext=${filename/*./}
+  fullnewname="${prefix}${name}${suffix}${numbering}.$ext"
   if [ $verbose -eq 1 ] ; then
-    echo "Renaming $file to $fullnewname ..."
+    echo "Renaming $filename to $fullnewname ..."
   fi ;
   if [ $overwrite -eq 0 ] ; then
-    cp $file $fullnewname
+    cp "$filename" $fullnewname
   else
-    mv $file $fullnewname
+    mv "$filename" $fullnewname
   fi ;
+done
 done
